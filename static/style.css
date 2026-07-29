@@ -69,6 +69,18 @@ div[data-testid="stMarkdownContainer"]:has(.tile) {
     }
 }
 
+/* Destaque extra na peça que acabou de nascer de uma fusão: um brilho
+   dourado breve, diferente da animação padrão de "pop". */
+.tile.merged {
+    box-shadow: 0 0 0 3px #edc22e, 0 0 14px 2px #edc22eaa;
+    animation: tile-pop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), tile-merge-glow 0.5s ease-out;
+}
+
+@keyframes tile-merge-glow {
+    0% { box-shadow: 0 0 0 3px #edc22e, 0 0 20px 6px #edc22ecc; }
+    100% { box-shadow: 0 0 0 3px #edc22e00, 0 0 0 0 #edc22e00; }
+}
+
 div[data-testid="column"] {
     display: flex;
     justify-content: center;
@@ -147,4 +159,8 @@ div[data-testid="column"] {
 .status-badge.won {
     background: #edc22e33;
     color: #a67c00;
+}
+.status-badge.daily {
+    background: #4a90d933;
+    color: #2b6cb0;
 }
