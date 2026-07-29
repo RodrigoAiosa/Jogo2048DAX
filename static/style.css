@@ -35,16 +35,21 @@ div[data-testid="stVerticalBlock"] > div {
     line-height: 1.1;
     text-align: center;
     padding: 2px;
-    animation: tile-pop 0.16s ease-out;
+    animation: tile-pop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Animação leve toda vez que uma peça muda (move/funde/surge) */
+/* Animação leve toda vez que uma peça muda (move/funde/surge):
+   encolhe e "estica" de volta com um pequeno efeito de mola. */
 @keyframes tile-pop {
-    from {
-        transform: scale(0.86);
-        opacity: 0.55;
+    0% {
+        transform: scale(0.72);
+        opacity: 0.4;
     }
-    to {
+    70% {
+        transform: scale(1.06);
+        opacity: 1;
+    }
+    100% {
         transform: scale(1);
         opacity: 1;
     }
