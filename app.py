@@ -155,21 +155,19 @@ def render_board() -> None:
 
 
 def render_controls() -> None:
-    _, c2, _ = st.columns(3)
-    with c2:
-        st.button("⬆️", key="up", on_click=do_move, args=(move_up,), use_container_width=True)
+    # Botões de movimento (⬆️⬅️➡️⬇️) ficam ocultos via CSS (.st-key-*): eles
+    # continuam existindo no DOM só para o streamlit_shortcuts conseguir
+    # "clicar" neles quando as setas do teclado são pressionadas. O jogador
+    # só enxerga o botão de reiniciar.
+    with st.container(key="dpad-hidden"):
+        st.button("⬆️", key="up", on_click=do_move, args=(move_up,))
+        st.button("⬅️", key="left", on_click=do_move, args=(move_left,))
+        st.button("➡️", key="right", on_click=do_move, args=(move_right,))
+        st.button("⬇️", key="down", on_click=do_move, args=(move_down,))
 
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.button("⬅️", key="left", on_click=do_move, args=(move_left,), use_container_width=True)
+    _, c2, _ = st.columns(3)
     with c2:
         st.button("🔄", key="restart", on_click=restart, use_container_width=True)
-    with c3:
-        st.button("➡️", key="right", on_click=do_move, args=(move_right,), use_container_width=True)
-
-    _, c2, _ = st.columns(3)
-    with c2:
-        st.button("⬇️", key="down", on_click=do_move, args=(move_down,), use_container_width=True)
 
     add_shortcuts(
         up="arrowup",
@@ -199,7 +197,7 @@ def render_footer_popovers() -> None:
     with c2:
         with st.popover("❓ Como jogar", use_container_width=True):
             st.markdown(
-                "- Use as **setas do teclado** (↑ ↓ ← →) ou os botões para mover as peças.\n"
+                "- Use as **setas do teclado** (↑ ↓ ← →) para mover as peças.\n"
                 "- Peças com a **mesma função DAX** se fundem, virando o próximo nível.\n"
                 "- Pressione **R** ou clique em 🔄 para reiniciar.\n"
                 "- Chegue ao 🏆 **MESTRE DAX** (peça 2048) para vencer!"
