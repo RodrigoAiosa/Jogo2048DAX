@@ -14,9 +14,23 @@ footer { visibility: hidden; height: 0; }
     max-width: 480px;
 }
 
-/* Reduz o espaço vertical extra que o Streamlit insere entre widgets */
+/* O Streamlit divide a altura total da página em partes IGUAIS entre
+   os blocos de nível superior (cabeçalho, cada linha do tabuleiro,
+   controles, popovers), via flex-grow — independente do quanto cada
+   um realmente precisa. Isso faz o tabuleiro (que precisa de mais
+   espaço que os outros blocos) ser espremido, comendo o gap vertical.
+   Aqui tiramos todo mundo dessa divisão forçada. */
 div[data-testid="stVerticalBlock"] > div {
-    gap: 0.35rem;
+    gap: 1rem;
+    flex: 0 0 auto !important;
+}
+
+/* O Streamlit aplica uma margem negativa (-1rem) por baixo do texto em
+   markdown, pensada para parágrafos de texto comuns. Isso "puxava" a
+   peça 16px para cima, comendo exatamente o espaço do gap vertical
+   entre as linhas do tabuleiro. Neutralizamos só onde há uma peça. */
+div[data-testid="stMarkdownContainer"]:has(.tile) {
+    margin-bottom: 0 !important;
 }
 
 /* ------------------------------------------------------------------ */
@@ -31,7 +45,7 @@ div[data-testid="stVerticalBlock"] > div {
     justify-content: center;
     font-weight: 700;
     font-family: "Source Code Pro", "Consolas", monospace;
-    margin: 3px;
+    margin: 0;
     line-height: 1.1;
     text-align: center;
     padding: 2px;
