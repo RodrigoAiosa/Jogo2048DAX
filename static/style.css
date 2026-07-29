@@ -35,6 +35,19 @@ div[data-testid="stVerticalBlock"] > div {
     line-height: 1.1;
     text-align: center;
     padding: 2px;
+    animation: tile-pop 0.16s ease-out;
+}
+
+/* Animação leve toda vez que uma peça muda (move/funde/surge) */
+@keyframes tile-pop {
+    from {
+        transform: scale(0.86);
+        opacity: 0.55;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 div[data-testid="column"] {
@@ -51,6 +64,17 @@ div[data-testid="column"] {
     font-weight: 600;
     padding: 0.2rem 0;
     min-height: 2.1rem;
+}
+
+/* Setas de movimento (⬆️⬅️➡️⬇️): permanecem no DOM só para o
+   streamlit_shortcuts poder "clicar" nelas via teclado, mas ficam
+   totalmente ocultas da tela — o jogo só é jogável pelo teclado. */
+.st-key-dpad-hidden {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 /* ------------------------------------------------------------------ */
