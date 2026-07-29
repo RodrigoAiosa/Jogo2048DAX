@@ -1,0 +1,107 @@
+/* ------------------------------------------------------------------ */
+/* Layout compacto: o jogo inteiro deve caber na tela, sem rolagem     */
+/* ------------------------------------------------------------------ */
+
+/* Remove cabeçalho, menu e rodapé padrão do Streamlit */
+#MainMenu { visibility: hidden; }
+header[data-testid="stHeader"] { height: 0; visibility: hidden; }
+footer { visibility: hidden; height: 0; }
+
+/* Reduz o espaçamento vertical padrão do container principal */
+.block-container {
+    padding-top: 0.8rem !important;
+    padding-bottom: 0.5rem !important;
+    max-width: 480px;
+}
+
+/* Reduz o espaço vertical extra que o Streamlit insere entre widgets */
+div[data-testid="stVerticalBlock"] > div {
+    gap: 0.35rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Peças do tabuleiro                                                  */
+/* ------------------------------------------------------------------ */
+.tile {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-family: "Source Code Pro", "Consolas", monospace;
+    margin: 3px;
+    line-height: 1.1;
+    text-align: center;
+    padding: 2px;
+}
+
+div[data-testid="column"] {
+    display: flex;
+    justify-content: center;
+}
+
+/* ------------------------------------------------------------------ */
+/* Botões (D-pad e ações)                                              */
+/* ------------------------------------------------------------------ */
+.stButton button {
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.2rem 0;
+    min-height: 2.1rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Placar                                                              */
+/* ------------------------------------------------------------------ */
+.score-box {
+    background: #bbada0;
+    border-radius: 8px;
+    padding: 4px 10px;
+    text-align: center;
+    color: white;
+}
+
+.score-box .label {
+    font-size: 0.65rem;
+    opacity: 0.85;
+    text-transform: uppercase;
+}
+
+.score-box .value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.game-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.game-subtitle {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.status-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-top: 2px;
+}
+.status-badge.over {
+    background: #f6564033;
+    color: #c0392b;
+}
+.status-badge.won {
+    background: #edc22e33;
+    color: #a67c00;
+}
